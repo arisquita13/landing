@@ -1,0 +1,1201 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>¡Inscríbete! - Congreso de Ingenierías UDL 2025</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --udl-green: #006747;
+            --udl-white: #FFFFFF;
+            --udl-black: #000000;
+            --udl-light-green: #e8f5e8;
+            --bs-body-font-family: 'Poppins', sans-serif;
+        }
+
+        /* Jerarquía visual profesional */
+        h1, h2, h3, h4, h5, h6, .navbar-brand, .display-5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        .lead { font-weight: 400; }
+        p, .card-text, .form-label, .accordion-body, .nav-link { 
+            font-weight: 300; 
+        }
+        
+        .bg-udl-green { background-color: var(--udl-green) !important; }
+        .bg-udl-light { background-color: var(--udl-light-green) !important; }
+        .text-udl-green { color: var(--udl-green) !important; }
+
+        /* Micro-interacción CSS nativa */
+        .btn-udl {
+            background-color: var(--udl-green);
+            border-color: var(--udl-green);
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px -5px rgba(0, 103, 71, 0.5);
+        }
+
+        .btn-udl:hover {
+            background-color: #00563a;
+            border-color: #00563a;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px -5px rgba(0, 103, 71, 0.7);
+        }
+
+        /* Tarjetas (Cards) refinadas */
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--udl-light-green) 0%, var(--udl-white) 100%);
+        }
+
+        .footer {
+            background-color: var(--udl-black) !important;
+            color: white;
+        }
+
+        .carousel-item img {
+            height: 500px;
+            object-fit: cover;
+        }
+
+        /* --- Estilos para el Temporizador --- */
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        #countdown > div {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            min-width: 90px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1px solid var(--udl-green);
+        }
+        #countdown span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--udl-green);
+        }
+        #countdown small {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--udl-black);
+        }
+
+        /* --- Estilos para Beneficios y Patrocinadores --- */
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--udl-green);
+        }
+        .sponsor-logo {
+            max-height: 60px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        .sponsor-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* --- MEJORA: Estilos para el Menú Toggle Fijo --- */
+        #menu-toggle-btn {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 1040; /* Justo debajo del offcanvas (1045) */
+            border-radius: 50%; /* Botón circular */
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: opacity 0.3s ease; /* Animación para ocultar/mostrar */
+        }
+
+        /* --- MEJORA: Estilos para el Offcanvas (Sidebar) --- */
+        .offcanvas-start {
+            width: 280px; /* Un ancho fijo para el sidebar */
+        }
+        .offcanvas-body .navbar-nav .nav-link {
+            padding: 0.75rem 1rem;
+            font-size: 1.1rem; /* Ligeramente más grande */
+            font-weight: 400; /* Más legible */
+            color: var(--bs-body-color);
+            transition: all 0.2s ease-in-out;
+            border-radius: 0.25rem;
+        }
+        .offcanvas-body .navbar-nav .nav-link:hover,
+        .offcanvas-body .navbar-nav .nav-link:focus {
+            color: var(--udl-green) !important;
+            background-color: var(--udl-light-green);
+            transform: translateX(5px);
+        }
+        
+        @media (max-width: 768px) {
+            #menu-toggle-btn {
+                top: 1rem;
+                left: 1rem;
+            }
+            .carousel-item img {
+                height: 300px;
+            }
+            #countdown span { font-size: 1.5rem; }
+            #countdown > div { padding: 0.5rem; min-width: 70px; }
+            #countdown small { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="btn btn-udl btn-lg" id="menu-toggle-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-label="Abrir menú">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mainMenu" aria-labelledby="mainMenuLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title text-udl-green" id="mainMenuLabel">
+                <img src="congreso/logo.jpg" alt="Logo UDL" height="40" class="me-2">
+                Congreso UDL
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar menú"></button>
+        </div>
+        
+        <div class="offcanvas-body d-flex flex-column">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item"><a class="nav-link" href="#hero" data-bs-dismiss="offcanvas"><i class="bi bi-house-fill me-2"></i>Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#beneficios" data-bs-dismiss="offcanvas"><i class="bi bi-star-fill me-2"></i>Beneficios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#charlas" data-bs-dismiss="offcanvas"><i class="bi bi-easel-fill me-2"></i>Actividades</a></li>
+                <li class="nav-item"><a class="nav-link" href="#agenda" data-bs-dismiss="offcanvas"><i class="bi bi-calendar-event-fill me-2"></i>Agenda</a></li>
+                <li class="nav-item"><a class="nav-link" href="#speakers" data-bs-dismiss="offcanvas"><i class="bi bi-mic-fill me-2"></i>Ponentes</a></li>
+                <li class="nav-item"><a class="nav-link" href="#galeria" data-bs-dismiss="offcanvas"><i class="bi bi-images me-2"></i>Galería</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq" data-bs-dismiss="offcanvas"><i class="bi bi-question-circle-fill me-2"></i>FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#registro" data-bs-dismiss="offcanvas"><i class="bi bi-check-circle-fill me-2"></i>Registro</a></li>
+            </ul>
+            
+            <a href="#registro" class="btn btn-udl w-100 mt-3" data-bs-dismiss="offcanvas">¡Regístrate Ya!</a>
+        </div>
+
+        <div class="offcanvas-footer p-3 border-top">
+            <h6 class="mb-2">Apariencia</h6>
+            <div class="dropdown" id="theme-switcher">
+                <button class="btn btn-outline-secondary w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Seleccionar tema">
+                    <span class="d-flex align-items-center">
+                        <i class="bi me-2" id="theme-active-icon"></i>
+                        <span id="theme-active-text"></span>
+                    </span>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <ul class="dropdown-menu w-100">
+                    <li>
+                        <button class="dropdown-item d-flex align-items-center" type="button" data-theme-value="light">
+                            <i class="bi bi-sun-fill me-2"></i> Claro
+                        </button>
+                    </li>
+                    <li>
+                        <button class="dropdown-item d-flex align-items-center" type="button" data-theme-value="dark">
+                            <i class="bi bi-moon-fill me-2"></i> Oscuro
+                        </button>
+                    </li>
+                    <li>
+                        <button class="dropdown-item d-flex align-items-center" type="button" data-theme-value="auto">
+                            <i class="bi bi-circle-half me-2"></i> Predeterminado
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <section id="hero" class="py-5 hero-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-12 col-md-6">
+                    <h1 class="display-4 fw-bold text-udl-green">Transforma tu Futuro en la Ingeniería</h1>
+                    <p class="lead text-dark fs-4 my-3">
+                        Conéctate con líderes de la industria, aprende en talleres prácticos y define tu carrera en el
+                        <strong>Congreso de Ingenierías UDL 2025</strong>.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="#registro" class="btn btn-udl btn-lg">¡Regístrate Gratis Ahora!</a>
+                        <a href="#agenda" class="btn btn-outline-dark btn-lg">Ver Programa</a>
+                    </div>
+                    <div class="mt-4 d-flex flex-wrap gap-3">
+                        <span class="badge bg-udl-green fs-6"><i class="bi bi-geo-alt-fill me-1"></i> HS HOTSSON
+                            Hotel Leon</span>
+                        <span class="badge bg-dark fs-6"><i class="bi bi-calendar-check-fill me-1"></i> 28 de
+                            Noviembre 2025</span> </div>
+                </div>
+                <div class="col-12 col-md-6 text-center">
+                    <h4 class="text-udl-green fw-bold">¡Los lugares son limitados!</h4>
+                    <p classs="text-dark">El evento comienza en:</p>
+                    <div id="countdown">
+                        <div><span id="days">00</span><small>Días</small></div>
+                        <div><span id="hours">00</span><small>Horas</small></div>
+                        <div><span id="minutes">00</span><small>Minutos</small></div>
+                        <div><span id="seconds">00</span><small>Segundos</small></div>
+                    </div>
+                    <img src="congreso/foto_segundo_congreso_36.jpeg" class="img-fluid rounded shadow-lg"
+                        alt="Foto del congreso de ingenierías anterior" style="max-height: 350px; width: auto; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="py-5 section-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="text-udl-green">¿Por qué asistir?</h2>
+                <p class="lead text-dark">Esto no es solo un congreso, es una inversión en tu carrera.</p>
+            </div>
+            <div class="row g-4 text-center">
+                <div class="col-md-3 col-sm-6">
+                    <div class="benefit-icon mb-3"><i class="bi bi-briefcase-fill"></i></div>
+                    <h5 class="fw-bold">Networking Estratégico</h5>
+                    <p>Conecta con directivos de empresas líderes como Siemens y GUREGO.</p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="benefit-icon mb-3"><i class="bi bi-tools"></i></div>
+                    <h5 class="fw-bold">Talleres Prácticos</h5>
+                    <p>Aprende SolidWorks, Ciencia de Datos y más, aplicado a la industria real.</p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="benefit-icon mb-3"><i class="bi bi-patch-check-fill"></i></div>
+                    <h5 class="fw-bold">Valor Curricular</h5>
+                    <p>Recibe una constancia de participación que impulsará tu CV.</p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="benefit-icon mb-3"><i class="bi bi-lightbulb-fill"></i></div>
+                    <h5 class="fw-bold">Innovación y Tendencias</h5>
+                    <p>Descubre lo último en IA, Ciberseguridad y Robótica Colaborativa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="charlas" class="py-5 bg-udl-light">
+        <div class="container">
+            <h2 class="mb-4 text-udl-green">Actividades Académicas <span class="badge bg-dark">2025</span></h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/foto_segundo_congreso_26.jpeg" class="card-img-top"
+                            style="height: 200px; object-fit: cover;" alt="IA Industrial Cibersegura">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">IA Industrial Cibersegura</h5>
+                            <p class="card-text">Implementación segura de IA en entornos industriales con enfoque en
+                                cybersecurity.</p>
+                            <span class="badge text-bg-primary">Conferencia</span>
+                            <span class="badge text-bg-warning">Cybersecurity</span>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button class="btn btn-sm btn-udl" data-bs-toggle="modal"
+                                data-bs-target="#modalConferencia1">Más info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/foto_segundo_congreso_28.jpeg" class="card-img-top"
+                            style="height: 200px; object-fit: cover;" alt="Inspekto: IA con ADN Industria">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">Inspekto: IA con ADN Industria</h5>
+                            <p class="card-text">Sistemas de inspección automatizada con IA especializada para la
+                                industria.</p>
+                            <span class="badge text-bg-primary">Conferencia</span>
+                            <span class="badge text-bg-info">Automation</span>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button class="btn btn-sm btn-udl" data-bs-toggle="modal"
+                                data-bs-target="#modalConferencia2">Más info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/foto_segundo_congreso_30.jpeg" class="card-img-top"
+                            style="height: 200px; object-fit: cover;" alt="Robots Colaborativos">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">Robots Colaborativos</h5>
+                            <p class="card-text">Integración segura de robots colaborativos en procesos de manufactura y
+                                automatización.</p>
+                            <span class="badge text-bg-primary">Conferencia</span>
+                            <span class="badge text-bg-success">Robótica</span>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button class="btn btn-sm btn-udl" data-bs-toggle="modal"
+                                data-bs-target="#modalConferencia3">Más info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section id="agenda" class="py-5 section-white">
+        <div class="container">
+            <h2 class="mb-4 text-udl-green">Agenda del Evento</h2>
+            <div class="accordion" id="agendaAcc">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="day1h">
+                        <button class="accordion-button bg-udl-light text-udl-green" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#day1" aria-expanded="true"
+                            aria-controls="day1">
+                            <strong><i class="bi bi-calendar3 me-2"></i> Programa Completo - 28 de Noviembre
+                                2025</strong>
+                        </button>
+                    </h2>
+                    <div id="day1" class="accordion-collapse collapse show" aria-labelledby="day1h"
+                        data-bs-parent="#agendaAcc">
+                        <div class="accordion-body">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><strong>7:00 - 7:30</strong> Registro</span>
+                                    <span class="badge text-bg-secondary">Lobby Principal</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><strong>7:45 - 8:00</strong> Inauguración</span>
+                                    <span class="badge text-bg-info">Auditorio Central</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><strong>8:00 - 8:45</strong> Conferencia 1: IA Industrial Cibersegura</span>
+                                    <span class="badge text-bg-primary">Auditorio Principal</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><strong>9:00 - 9:30</strong> Desayuno / Coffee Break</span>
+                                    <span class="badge text-bg-success">Área de Expositores</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><strong>9:45 - 10:30</strong> Conferencia 2: Inspekto: IA con ADN Industria</span>
+                                    <span class="badge text-bg-primary">Auditorio Principal</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><strong>10:45 - 11:30</strong> Conferencia 3: Robots Colaborativos</span>
+                                    <span class="badge text-bg-primary">Auditorio Principal</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><strong>11:45 - 12:15</strong> Receso</span>
+                                    <span class="badge text-bg-secondary">Áreas Comunes</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><strong>12:15 - 14:00</strong> Talleres Simultáneos</span>
+                                    <span class="badge text-bg-danger">Laboratorios</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><strong>14:00 - 14:30</strong> Clausura, Rifa y Toma de Fotografía</span>
+                                    <span class="badge text-bg-info">Auditorio Central</span>
+                                </li>
+                            </ul>
+
+                            <div class="mt-3 p-3 bg-udl-light rounded">
+                                <h6 class="mb-2 text-udl-green"><i class="bi bi-tools me-1"></i> Talleres
+                                    Disponibles (12:15 - 14:00):</h6>
+                                <div class="list-group list-group-flush">
+                                    <a href="#" class="list-group-item list-group-item-action"
+                                        data-bs-toggle="modal" data-bs-target="#modalTaller1">
+                                        <i class="bi bi-box-arrow-up-right me-2"></i> Simulación con SolidWorks
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action"
+                                        data-bs-toggle="modal" data-bs-target="#modalTaller2">
+                                        <i class="bi bi-box-arrow-up-right me-2"></i> Ciencia de Datos
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action"
+                                        data-bs-toggle="modal" data-bs-target="#modalTaller3">
+                                        <i class="bi bi-box-arrow-up-right me-2"></i> Introducción a Neuronas
+                                        Artificiales
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action"
+                                        data-bs-toggle="modal" data-bs-target="#modalTaller4">
+                                        <i class="bi bi-box-arrow-up-right me-2"></i> Manufactura Aditiva
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="speakers" class="py-5 bg-udl-light">
+        <div class="container">
+            <h2 class="mb-4 text-udl-green text-center">Conferencistas e Instructores</h2>
+            
+            <h3 class="mb-4 text-dark">Conferencistas</h3>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/colin.jpeg" class="card-img-top" style="height: 250px; object-fit: cover;"
+                            alt="Ing. Oscar Colin Cortes">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">Ing. Oscar Colin Cortes <span
+                                    class="badge text-bg-warning">Cybersecurity</span></h5>
+                            <p class="card-text">Cybersecurity Leader (America's) SIEMENS</p>
+                            <p class="card-text"><small class="text-muted">Conferencia: IA Industrial
+                                    Cibersegura</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/coxca.jpeg" class="card-img-top" style="height: 250px; object-fit: cover;"
+                            alt="Gilberto Coxca">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">Gilberto Coxca <span
+                                    class="badge text-bg-primary">Automation</span>
+                            </h5>
+                            <p class="card-text">Siemens Factory Automation</p>
+                            <p class="card-text"><small class="text-muted">Conferencia: Inspekto: IA con ADN
+                                    Industria</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/sanchez.jpeg" class="card-img-top" style="height: 250px; object-fit: cover;"
+                            alt="Billy Sánchez Olivares">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">Billy Sánchez Olivares <span
+                                    class="badge text-bg-success">Robótica</span></h5>
+                            <p class="card-text">Project Manager Comercial Robótica León - GUREGO</p>
+                            <p class="card-text"><small class="text-muted">Conferencia: Robots Colaborativos</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+            <h3 class="mt-5 mb-4 text-dark">Talleristas</h3>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/martinez.jpeg" class="card-img-top" style="height: 250px; object-fit: cover;"
+                            alt="Hugo Martínez Zepeda">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">Hugo Martínez Zepeda <span
+                                    class="badge text-bg-info">SolidWorks</span></h5>
+                            <p class="card-text">CRE Application Engineer Mexico & Latam - VIAS 3D</p>
+                            <p class="card-text"><small class="text-muted">Taller: Simulación con SolidWorks</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/macias.jpeg" class="card-img-top" style="height: 250px; object-fit: cover;"
+                            alt="Dr. Ricardo Macías Jamaica">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">Dr. Ricardo Macías Jamaica <span
+                                    class="badge text-bg-dark">Ciencia
+                                    de Datos</span></h5>
+                            <p class="card-text">Departamento de Ingeniería Química - TECNM Campus Celaya</p>
+                            <p class="card-text"><small class="text-muted">Taller: Ciencia de Datos</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/ferro.jpeg" class="card-img-top" style="height: 250px; object-fit: cover;"
+                            alt="Ing. Rodolfo Ferro">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">Ing. Rodolfo Ferro <span
+                                    class="badge text-bg-warning">AI
+                                    Developer</span></h5>
+                            <p class="card-text">Desarrollador de Inteligencia Artificial y Blockchain - GameCoder
+                                Studios</p>
+                            <p class="card-text"><small class="text-muted">Taller: Introducción a Neuronas
+                                    Artificiales</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="congreso/alvarez.jpeg" class="card-img-top" style="height: 250px; object-fit: cover;"
+                            alt="Ing. José Emmanuel Álvarez Camarena">
+                        <div class="card-body">
+                            <h5 class="card-title text-udl-green">Ing. José Emmanuel Álvarez Camarena <span
+                                    class="badge text-bg-success">Manufactura</span></h5>
+                            <p class="card-text">Ingeniero de Proyecto Tecnología a Bordo - Flecha Amarilla</p>
+                            <p class="card-text"><small class="text-muted">Taller: Manufactura Aditiva</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </section>
+
+    <section id="sponsors" class="py-5 section-white">
+        <div class="container">
+            <h2 class="text-center text-udl-green mb-4">Empresas que nos Impulsan</h2>
+            <div
+                class="d-flex flex-wrap justify-content-center align-items-center gap-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Siemens-logo.svg/1200px-Siemens-logo.svg.png" alt="Logo de Siemens" class="sponsor-logo">
+                <h4 class="sponsor-logo" style="filter: none; opacity: 1;">GUREGO</h4>
+                <h4 class="sponsor-logo" style="filter: none; opacity: 1;">VIAS 3D</h4>
+                <h4 class="sponsor-logo" style="filter: none; opacity: 1;">GameCoder Studios</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="py-5 bg-udl-light">
+        <div class="container">
+            <h2 class="mb-4 text-udl-green">Galería del Evento</h2>
+            <div id="galeriaCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#galeriaCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#galeriaCarousel" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#galeriaCarousel" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#galeriaCarousel" data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#galeriaCarousel" data-bs-slide-to="4"
+                        aria-label="Slide 5"></button>
+                    <button type="button" data-bs-target="#galeriaCarousel" data-bs-slide-to="5"
+                        aria-label="Slide 6"></button>
+                </div>
+                <div class="carousel-inner rounded shadow-lg">
+                    <div class="carousel-item active">
+                        <img src="congreso/foto_segundo_congreso_20.jpeg" class="d-block w-100"
+                            alt="Auditorio Principal">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="congreso/foto_segundo_congreso_21.jpeg" class="d-block w-100" alt="Laboratorios UDL">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="congreso/foto_segundo_congreso_25.jpeg" class="d-block w-100"
+                            alt="Conferencia Pasada">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="congreso/foto_segundo_congreso_29.jpeg" class="d-block w-100" alt="Asistentes">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="congreso/foto_segundo_congreso_33.jpeg" class="d-block w-100" alt="Expositores">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="congreso/foto_segundo_congreso_35.jpeg" class="d-block w-100" alt="Instalaciones">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#galeriaCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#galeriaCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-5 section-white">
+        <div class="container">
+            <h2 class="mb-4 text-udl-green">Preguntas Frecuentes</h2>
+            <div class="accordion" id="faqAcc">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                        ¿El evento tiene algún costo?
+                      </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                      <div class="accordion-body">
+                        No, el evento es <strong>totalmente gratuito</strong> para alumnos, egresados y personal de la UDL. El registro es obligatorio debido al cupo limitado.
+                      </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                        ¿A quién va dirigido este congreso?
+                      </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                      <div class="accordion-body">
+                        Está diseñado principalmente para estudiantes de todas las ingenierías (Industrial, Software, Mecatrónica, etc.), pero está abierto a cualquier alumno de la UDL interesado en la tecnología, la innovación y la industria 4.0.
+                      </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                        ¿Cómo obtengo mi constancia de participación?
+                      </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                      <div class="accordion-body">
+                        Se emitirá una constancia digital con valor curricular. Para obtenerla, deberás registrar tu asistencia al inicio del evento y al menos a <strong>dos conferencias y un taller</strong>. Las constancias se enviarán al correo electrónico registrado una semana después del evento.
+                      </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                        ¿Necesito llevar mi propia laptop para los talleres?
+                      </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                      <div class="accordion-body">
+                        <strong>Sí, es altamente recomendable.</strong> Especialmente para los talleres de SolidWorks y Ciencia de Datos, traer tu propio equipo te permitirá seguir al instructor. Asegúrate de tener el software preinstalado (se enviarán instrucciones por correo).
+                      </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                        ¿Habrá servicio de alimentos y bebidas?
+                      </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                      <div class="accordion-body">
+                        Sí, se ofrecerá un <strong>Coffee Break</strong> a media mañana (ver Agenda) que incluye café, té, agua y bocadillos para fomentar el networking entre asistentes y ponentes.
+                      </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                        ¿Cuál es el código de vestimenta?
+                      </button>
+                    </h2>
+                    <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                      <div class="accordion-body">
+                        Se recomienda un código de vestimenta <strong>"Business Casual" (Casual de negocios)</strong>. Recuerda que habrá directivos de empresas importantes, por lo que es una excelente oportunidad para dar una buena impresión profesional.
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="registro" class="py-5 bg-udl-light">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="mb-2 text-udl-green">¡Tu lugar te espera!</h2>
+                <p class="lead mb-4">El registro es gratuito, pero el cupo es limitado. Asegura tu asistencia.</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <form class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Nombre(s)</label>
+                            <input type="text" class="form-control" id="nombre" required>
+                            <div class="invalid-feedback">
+                                Por favor, ingresa tu nombre.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="apellidos" required>
+                            <div class="invalid-feedback">
+                                Por favor, ingresa tus apellidos.
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <label for="email" class="form-label">Correo Institucional</label>
+                            <input type="email" class="form-control" id="email" required>
+                            <div class="invalid-feedback">
+                                Por favor, ingresa un correo válido.
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="matricula" class="form-label">Matrícula</label>
+                            <input type="text" class="form-control" id="matricula" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="taller" class="form-label">Taller de Interés (Elige 1)</label>
+                            <select class="form-select" id="taller" required>
+                                <option value="" selected disabled>Selecciona un taller...</option>
+                                <option value="solidworks">Simulación con SolidWorks</option>
+                                <option value="datos">Ciencia de Datos</option>
+                                <option value="neuronas">Introducción a Neuronas Artificiales</option>
+                                <option value="manufactura">Manufactura Aditiva</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor, selecciona un taller.
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">
+                                    Acepto los <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalTerminos">términos y condiciones</a> del evento.
+                                </label>
+                                <div class="invalid-feedback">
+                                    Debes aceptar los términos y condiciones.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button class="btn btn-udl btn-lg" type="submit">¡Quiero mi lugar! <i class="bi bi-send-fill ms-1"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="toastOk" class="toast align-items-center text-bg-success border-0" role="alert"
+                    aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <i class="bi bi-check-circle-fill me-2"></i> ¡Registro exitoso! Te vemos en el congreso.
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-udl-green text-white">
+        <div class="container text-center">
+            <h2 class="mb-3">¿Tienes dudas sobre el congreso?</h2>
+            <p class="lead mb-4">Contáctanos para resolver cualquier pregunta sobre el evento, talleres o registro</p>
+            <button class="btn btn-light btn-lg" data-bs-toggle="modal"
+                data-bs-target="#contactoModal">Contáctanos</button>
+        </div>
+    </section>
+
+    <footer class="py-4 footer">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Universidad De León. Todos los derechos reservados.</p>
+            <p class="mb-0">
+                <a href="#" class="text-white" data-bs-toggle="modal" data-bs-target="#contactoModal">Contacto</a>
+            </p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="modalConferencia1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-udl-green text-white">
+                    <h5 class="modal-title">IA Industrial Cibersegura</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Conferencista:</strong> Ing. Oscar Colin Cortes</p>
+                    <p><strong>Cargo:</strong> Cybersecurity Leader (America's) SIEMENS</p>
+                    <p><strong>Horario:</strong> 8:00 - 8:45</p>
+                    <p>Exploraremos los desafíos y soluciones de ciberseguridad en la implementación de sistemas de
+                        inteligencia artificial en entornos industriales.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-udl" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalConferencia2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-udl-green text-white">
+                    <h5 class="modal-title">Inspekto: IA con ADN Industria</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Conferencista:</strong> Gilberto Coxca</p>
+                    <p><strong>Cargo:</strong> Siemens Factory Automation</p>
+                    <p><strong>Horario:</strong> 9:45 - 10:30</p>
+                    <p>Descubre cómo los sistemas de inspección automatizada con IA están
+                        revolucionando el control de calidad en la industria.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-udl" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalConferencia3" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-udl-green text-white">
+                    <h5 class="modal-title">Robots Colaborativos</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Conferencista:</strong> Billy Sánchez Olivares</p>
+                    <p><strong>Cargo:</strong> Project Manager Comercial Robótica León - GUREGO</p>
+                    <p><strong>Horario:</strong> 10:45 - 11:30</p>
+                    <p>Aprende sobre la integración segura de robots colaborativos en líneas de producción y cómo están
+                        transformando la interacción humano-robot.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-udl" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalTaller1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-udl-green text-white">
+                    <h5 class="modal-title">Simulación con SolidWorks</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Instructor:</strong> Hugo Martínez Zepeda</p>
+                    <p><strong>Cargo:</strong> CRE Application Engineer Mexico & Latam - VIAS 3D</p>
+                    <p><strong>Horario:</strong> 12:15 - 14:00</p>
+                    <p>Taller práctico donde aprenderás técnicas avanzadas de simulación en SolidWorks para validar
+                        diseños ingenieriles.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-udl" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalTaller2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-udl-green text-white">
+                    <h5 class="modal-title">Ciencia de Datos</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Instructor:</strong> Dr. Ricardo Macías Jamaica</p>
+                    <p><strong>Cargo:</strong> Departamento de Ingeniería Química - TECNM Campus Celaya</p>
+                    <p><strong>Horario:</strong> 12:15 - 14:00</p>
+                    <p>Introducción a los fundamentos de ciencia de datos y sus aplicaciones prácticas en diversos
+                        campos de la ingeniería.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-udl" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalTaller3" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-udl-green text-white">
+                    <h5 class="modal-title">Introducción a Neuronas Artificiales</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Instructor:</strong> Ing. Rodolfo Ferro</p>
+                    <p><strong>Cargo:</strong> Desarrollador de Inteligencia Artificial y Blockchain - GameCoder Studios
+                    </p>
+                    <p><strong>Horario:</strong> 12:15 - 14:00</p>
+                    <p>Conoce los conceptos fundamentales de las redes neuronales artificiales y sus aplicaciones en
+                        proyectos de ingeniería.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-udl" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalTaller4" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-udl-green text-white">
+                    <h5 class="modal-title">Manufactura Aditiva</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Instructor:</strong> Ing. José Emmanuel Álvarez Camarena</p>
+                    <p><strong>Cargo:</strong> Ingeniero de Proyecto Tecnología a Bordo - Flecha Amarilla</p>
+                    <p><strong>Horario:</strong> 12:15 - 14:00</p>
+                    <p>Exploración de técnicas de manufactura aditiva (impresión 3D) y sus aplicaciones en el desarrollo
+                        de prototipos y componentes industriales.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-udl" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="contactoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-udl-green text-white">
+                    <h5 class="modal-title">Contáctanos</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Si tienes alguna pregunta sobre el congreso, no dudes en contactarnos:</p>
+                    <ul>
+                        <li><strong>Email:</strong> congreso.ingenierias@udl.edu.mx</li>
+                        <li><strong>Teléfono:</strong> (477) 123 4567</li>
+                        <li><strong>Dirección:</strong> Universidad De León, Plantel Torres Landa</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-udl" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalTerminos" tabindex="-1" aria-labelledby="modalTerminosLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-udl-green text-white">
+                    <h5 class="modal-title" id="modalTerminosLabel">Términos y Condiciones</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>1. Registro y Asistencia:</strong></p>
+                    <p>El registro es personal e intransferible. La asistencia es gratuita. Se requiere presentar
+                        identificación oficial o credencial de estudiante al momento del registro en el evento.</p>
+                    <p><strong>2. Constancias:</strong></p>
+                    <p>Se emitirá una constancia de participación digital a todos los asistentes que cumplan con la asistencia al 100% del evento (conferencias y taller seleccionado).</p>
+                    <p><strong>3. Código de Conducta:</strong></p>
+                    <p>Se espera que todos los participantes mantengan un comportamiento profesional y respetuoso. La
+                        organización se reserva el derecho de admisión.</p>
+                    <p><strong>4. Uso de Imagen:</strong></p>
+                    <p>Al asistir al evento, usted autoriza a la Universidad De León (UDL) el uso de fotografías y
+                        videos tomados durante el congreso para fines promocionales.</p>
+                    <p><strong>5. Talleres:</strong></p>
+                    <p>Los talleres tienen cupo limitado y se asignarán por orden de registro. La selección de taller es
+                        final.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-udl" data-bs-dismiss="modal">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    
+    <script>
+        (() => {
+            'use strict';
+
+            // --- Lógica del Temporizador ---
+            function startCountdown() {
+                const eventDate = new Date('2025-11-28T07:00:00').getTime();
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+                const countdownEl = document.getElementById('countdown');
+
+                if (!countdownEl) return; 
+
+                const countdownInterval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = eventDate - now;
+
+                    if (distance < 0) {
+                        clearInterval(countdownInterval);
+                        countdownEl.innerHTML = "<h4 class='text-udl-green'>¡El evento ha comenzado!</h4>";
+                        return;
+                    }
+                    const pad = (num) => (num < 10 ? '0' + num : num);
+                    
+                    daysEl.innerText = pad(Math.floor(distance / (1000 * 60 * 60 * 24)));
+                    hoursEl.innerText = pad(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+                    minutesEl.innerText = pad(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+                    secondsEl.innerText = pad(Math.floor((distance % (1000 * 60)) / 1000));
+                }, 1000);
+            }
+
+            // --- Lógica de Validación de Formulario (Bootstrap) ---
+            function setupFormValidation() {
+                const form = document.querySelector('.needs-validation');
+                const toastEl = document.getElementById('toastOk');
+                const toast = toastEl ? new bootstrap.Toast(toastEl) : null;
+
+                form?.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    if (!form.checkValidity()) {
+                        e.stopPropagation();
+                    } else {
+                        toast?.show();
+                        form.reset();
+                        form.classList.remove('was-validated');
+                        return;
+                    }
+                    form.classList.add('was-validated');
+                });
+            }
+
+            // --- MEJORA JUECES: Lógica Modo Oscuro (Nivel PRO - 3 Opciones) ---
+            function setupThemeToggle() {
+                const html = document.documentElement;
+                const themeSwitcher = document.getElementById('theme-switcher');
+                if (!themeSwitcher) return; // Salir si no existe el switcher
+
+                const activeThemeIcon = document.getElementById('theme-active-icon');
+                const activeThemeText = document.getElementById('theme-active-text');
+                
+                // 1. Función para aplicar el tema al <html>
+                const applyTheme = (theme) => {
+                    let effectiveTheme = theme;
+                    
+                    if (theme === 'auto') {
+                        // Si es 'auto', determina el tema del sistema
+                        effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    }
+                    
+                    // Aplica el tema al <html>
+                    html.setAttribute('data-bs-theme', effectiveTheme);
+                };
+
+                // 2. Función para actualizar la UI del botón dropdown
+                const updateUI = (theme) => {
+                    let iconClass, text;
+                    if (theme === 'light') {
+                        iconClass = 'bi-sun-fill';
+                        text = 'Claro';
+                    } else if (theme === 'dark') {
+                        iconClass = 'bi-moon-fill';
+                        text = 'Oscuro';
+                    } else { // 'auto'
+                        iconClass = 'bi-circle-half';
+                        text = 'Predeterminado';
+                    }
+                    
+                    if(activeThemeIcon) activeThemeIcon.className = `bi ${iconClass}`;
+                    if(activeThemeText) activeThemeText.innerText = text;
+                };
+
+                // 3. Obtener tema guardado o el default ('auto')
+                const getStoredTheme = () => localStorage.getItem('theme') || 'auto';
+
+                // 4. Inicialización al cargar la página
+                const initialTheme = getStoredTheme();
+                applyTheme(initialTheme);
+                updateUI(initialTheme);
+
+                // 5. Listeners para los botones del dropdown
+                themeSwitcher.querySelectorAll('[data-theme-value]').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const theme = button.getAttribute('data-theme-value');
+                        
+                        // Guardar preferencia en localStorage
+                        localStorage.setItem('theme', theme);
+                        
+                        // Aplicar y actualizar UI
+                        applyTheme(theme);
+                        updateUI(theme);
+                    });
+                });
+
+                // 6. Listener para cambios del SO (solo si está en 'auto')
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                    // Solo actualiza si el modo actual es 'auto'
+                    if (getStoredTheme() === 'auto') {
+                        const newEffectiveTheme = e.matches ? 'dark' : 'light';
+                        html.setAttribute('data-bs-theme', newEffectiveTheme);
+                    }
+                });
+            }
+
+            // --- MEJORA: Lógica para ocultar/mostrar botón de menú ---
+            function setupSidebarToggle() {
+                const menuToggleBtn = document.getElementById('menu-toggle-btn');
+                const mainMenu = document.getElementById('mainMenu');
+
+                if (!menuToggleBtn || !mainMenu) return; // Salir si no existen
+
+                // Ocultar botón cuando se muestra el offcanvas
+                mainMenu.addEventListener('show.bs.offcanvas', () => {
+                    menuToggleBtn.style.opacity = '0';
+                    menuToggleBtn.style.pointerEvents = 'none';
+                });
+
+                // Mostrar botón cuando se oculta el offcanvas
+                mainMenu.addEventListener('hide.bs.offcanvas', () => {
+                    menuToggleBtn.style.opacity = '1';
+                    menuToggleBtn.style.pointerEvents = 'auto';
+                });
+            }
+
+            // --- Lógica de Smooth Scroll ---
+            function setupSmoothScroll() {
+                // Modificado para funcionar con los enlaces dentro del offcanvas
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        if (this.getAttribute('href').startsWith('#') && this.getAttribute('data-bs-toggle') !== 'modal') {
+                            e.preventDefault();
+                            
+                            const targetId = this.getAttribute('href');
+                            const target = document.querySelector(targetId);
+                            
+                            if (target) {
+                                // Cierra el offcanvas si está abierto
+                                const offcanvasEl = this.closest('.offcanvas');
+                                if(offcanvasEl) {
+                                    const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasEl);
+                                    if(offcanvasInstance) {
+                                        offcanvasInstance.hide();
+                                    }
+                                }
+
+                                // Espera a que la animación del offcanvas termine (aprox)
+                                // O simplemente haz el scroll. El smooth scroll se ve bien.
+                                target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }
+                        }
+                    });
+                });
+            }
+
+            // --- Inicializar todas las funciones ---
+            document.addEventListener('DOMContentLoaded', () => {
+                startCountdown();
+                setupFormValidation();
+                setupThemeToggle();     // <-- Nueva función de 3 modos
+                setupSmoothScroll();
+                setupSidebarToggle(); // <-- Nueva función para el botón
+            });
+
+        })();
+    </script>
+</body>
+</html>
